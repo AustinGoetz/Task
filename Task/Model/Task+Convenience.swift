@@ -9,6 +9,7 @@
 import Foundation
 
 extension Task {
+    @discardableResult
     convenience init(name: String, notes: String? = nil, due: Date? = nil, isComplete: Bool = false) {
         self.init(context: CoreDataStack.context)
         self.name = name

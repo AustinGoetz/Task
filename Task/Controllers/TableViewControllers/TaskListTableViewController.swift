@@ -29,11 +29,13 @@ class TaskListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? ButtonTableViewCell
+            else { fatalError("Cell with identifier taskCell is not of type ButtonTableViewCell")}
 
         let task = TaskController.sharedInstance.tasks[indexPath.row]
-
-        cell.textLabel?.text = task.name
+        cell.delegate = self
+        cell.update(withTask: task)
+        
         return cell
     }
     
@@ -74,5 +76,16 @@ class TaskListTableViewController: UITableViewController {
                 else { return }
             destinationVC.task = TaskController.sharedInstance.tasks[indexPath.row]
         }
+    }
+}
+
+extension TaskListTableViewController: ButtonTableViewCellDelegate {
+    func buttonCellButtonTapped(_ sender: ButtonTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: sender)
+            else { return }
+        
+        let task = TaskController.sharedInstance.tasks[indexPath.row]
+        TaskController.sharedInstance.toggleIsCompleteFor(task: task)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

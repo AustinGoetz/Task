@@ -34,6 +34,8 @@ class TaskDetailTableViewController: UITableViewController {
         
         dueDateTextField.inputView = dueDatePicker
         dueDateValue = task?.due
+        
+        updateViews()
     }
     
     // MARK: - Actions
@@ -47,6 +49,7 @@ class TaskDetailTableViewController: UITableViewController {
         } else {
             TaskController.sharedInstance.add(taskWithName: name, notes: notes, due: dueDateValue)
         }
+        navigationController?.popViewController(animated: true)
     }
     
     
