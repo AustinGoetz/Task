@@ -16,18 +16,26 @@ class TaskController {
     static let sharedInstance = TaskController()
     
     // Source of Truth
-    var tasks: [Task] = []
     
-//    var mockTasks: [Task] {
-//        let task1 = Task(name: "Task 1")
-//        let task2 = Task(name: "Task w/Notes", notes: "My Notes", due: Date(), isComplete: true)
-//        return [task1, task2]
-//    }
+    
+    let fetchedResultsController: NSFetchedResultsController<Task>
     
     init() {
-        tasks = fetchTasks()
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        let completeSort = NSSortDescriptor(key: "isComplete", ascending: true)
+        let dueSort = NSSortDescriptor(key: "due", ascending: true)
+        
+        fetchRequest.sortDescriptors = [completeSort, dueSort]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: "isComplete", cacheName: nil)
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("There was an error fetching from fetch Controller \(error) \\ \(error.localizedDescription)")
+        }
     }
-
+    
     
     func add(taskWithName name: String, notes: String? = nil, due: Date? = nil) {
         Task(name: name, notes: notes, due: due)
@@ -61,13 +69,6 @@ class TaskController {
         } catch {
             print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
         }
-        
     }
-    
-    func fetchTasks() -> [Task]{
-        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        return (try? CoreDataStack.context.fetch(fetchRequest)) ?? []
-    }
-    
 }
 

@@ -38,7 +38,7 @@
                                                         <constraint firstAttribute="width" secondItem="xnt-py-NHh" secondAttribute="height" multiplier="1:1" id="l6Z-QR-BrP"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="24" minY="24" maxX="24" maxY="24"/>
-                                                    <state key="normal" title="Button" image="incomplete"/>
+                                                    <state key="normal" image="incomplete"/>
                                                     <connections>
                                                         <action selector="buttonTapped:" destination="xtl-Xt-HMP" eventType="touchUpInside" id="KIc-As-0qY"/>
                                                     </connections>
@@ -77,7 +77,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eal-uk-kze" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049.2753623188407" y="145.98214285714286"/>
+            <point key="canvasLocation" x="855" y="146"/>
         </scene>
         <!--Task Detail Table View Controller-->
         <scene sceneID="Weo-YR-jbl">
@@ -206,7 +206,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1902.8985507246377" y="145.98214285714286"/>
+            <point key="canvasLocation" x="1570" y="146"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K3t-H0-R9C">

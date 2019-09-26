@@ -54,6 +54,7 @@ class TaskDetailTableViewController: UITableViewController {
     
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         dueDateValue = sender.date
